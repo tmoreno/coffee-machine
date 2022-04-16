@@ -32,4 +32,13 @@ public class OrderToCommandTest {
 
         assertThat(command).isEqualTo("H::");
     }
+
+    @Test
+    public void should_crate_command_for_order_with_one_sugar() {
+        Order order = new Order(Drink.CHOCOLATE, 1);
+
+        String command = order.toCommand();
+
+        assertThat(command).isEqualTo("H:1:0");
+    }
 }
