@@ -2,24 +2,26 @@ package com.tmoreno.kata.coffeemachine;
 
 import java.math.BigDecimal;
 
-public final class Order {
+public abstract class Order {
 
-    private final Drink drink;
+    private final String drinkCode;
+    private final BigDecimal drinkPrice;
     private final int sugar;
     private final boolean extraHot;
 
-    public Order(Drink drink, int sugar, boolean extraHot) {
-        this.drink = drink;
+    public Order(String drinkCode, BigDecimal drinkPrice, int sugar, boolean extraHot) {
+        this.drinkCode = drinkCode;
+        this.drinkPrice = drinkPrice;
         this.sugar = sugar;
         this.extraHot = extraHot;
     }
 
     public String getDrinkCode() {
-        return drink.getCode();
+        return drinkCode;
     }
 
     public BigDecimal getDrinkPrice() {
-        return drink.getPrice();
+        return drinkPrice;
     }
 
     public int getSugar() {
