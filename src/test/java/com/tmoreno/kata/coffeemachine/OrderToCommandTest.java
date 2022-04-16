@@ -41,4 +41,13 @@ public class OrderToCommandTest {
 
         assertThat(command).isEqualTo("H:1:0");
     }
+
+    @Test
+    public void should_crate_command_for_order_with_two_sugar() {
+        Order order = new Order(Drink.TEA, 2);
+
+        String command = order.toCommand();
+
+        assertThat(command).isEqualTo("T:2:0");
+    }
 }
