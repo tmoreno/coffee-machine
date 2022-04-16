@@ -20,24 +20,45 @@ public class CoffeeMachineTest {
     private CoffeeMachine coffeeMachine;
 
     @Test
-    public void should_send_command_to_coffee_maker_for_one_tea_order() {
+    public void should_send_command_to_coffee_maker_for_a_tea_order() {
         coffeeMachine.make(new Order(Drink.TEA, 0, Drink.TEA.getPrice()));
 
         verify(coffeeMaker).execute("T::");
     }
 
     @Test
-    public void should_send_command_to_coffee_maker_for_one_coffee_order() {
+    public void should_send_command_to_coffee_maker_for_an_extra_hot_tea_order() {
+        coffeeMachine.make(new Order(Drink.EXTRA_HOT_TEA, 0, Drink.EXTRA_HOT_TEA.getPrice()));
+
+        verify(coffeeMaker).execute("Th::");
+    }
+
+    @Test
+    public void should_send_command_to_coffee_maker_for_a_coffee_order() {
         coffeeMachine.make(new Order(Drink.COFFEE, 0, Drink.COFFEE.getPrice()));
 
         verify(coffeeMaker).execute("C::");
     }
 
     @Test
-    public void should_send_command_to_coffee_maker_for_one_chocolate_order() {
+    public void should_send_command_to_coffee_maker_for_an_extra_hot_coffee_order() {
+        coffeeMachine.make(new Order(Drink.EXTRA_HOT_COFFEE, 0, Drink.EXTRA_HOT_COFFEE.getPrice()));
+
+        verify(coffeeMaker).execute("Ch::");
+    }
+
+    @Test
+    public void should_send_command_to_coffee_maker_for_a_chocolate_order() {
         coffeeMachine.make(new Order(Drink.CHOCOLATE, 0, Drink.CHOCOLATE.getPrice()));
 
         verify(coffeeMaker).execute("H::");
+    }
+
+    @Test
+    public void should_send_command_to_coffee_maker_for_an_extra_hot_chocolate_order() {
+        coffeeMachine.make(new Order(Drink.EXTRA_HOT_CHOCOLATE, 0, Drink.EXTRA_HOT_CHOCOLATE.getPrice()));
+
+        verify(coffeeMaker).execute("Hh::");
     }
 
     @Test
