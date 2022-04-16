@@ -11,6 +11,11 @@ public final class Order {
     }
 
     public String toCommand() {
-        return drink.getCode() + "::";
+        if (sugar > 0) {
+            return drink.getCode() + ":" + sugar + ":0";
+        }
+        else {
+            return drink.getCode() + "::";
+        }
     }
 }
