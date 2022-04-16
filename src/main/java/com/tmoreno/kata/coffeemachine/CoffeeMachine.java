@@ -1,5 +1,7 @@
 package com.tmoreno.kata.coffeemachine;
 
+import java.math.BigDecimal;
+
 public final class CoffeeMachine {
 
     private final CoffeeMaker coffeeMaker;
@@ -9,8 +11,12 @@ public final class CoffeeMachine {
     }
 
     public void make(Order order) {
-        if (order.getMoney() >= order.getDrink().getPrice()) {
+        if (order.getMoney().compareTo(order.getDrink().getPrice()) != -1) {
             coffeeMaker.execute(order.toCommand());
+        }
+        else {
+            BigDecimal missingMoney = order.getDrink().getPrice().subtract(order.getMoney());
+            coffeeMaker.execute("M:Not enough money. Missing " + missingMoney + " euros");
         }
     }
 }

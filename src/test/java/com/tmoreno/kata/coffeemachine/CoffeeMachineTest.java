@@ -6,6 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,7 +56,7 @@ public class CoffeeMachineTest {
 
     @Test
     public void should_send_not_enough_money_command() {
-        double money = Drink.TEA.getPrice() - 0.1;
+        BigDecimal money = Drink.TEA.getPrice().subtract(new BigDecimal("0.1"));
 
         coffeeMachine.make(new Order(Drink.TEA, 2, money));
 
