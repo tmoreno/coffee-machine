@@ -9,6 +9,8 @@ public final class CoffeeMachine {
     }
 
     public void make(Order order) {
-        coffeeMaker.execute(order.toCommand());
+        if (order.getMoney() >= order.getDrink().getPrice()) {
+            coffeeMaker.execute(order.toCommand());
+        }
     }
 }
