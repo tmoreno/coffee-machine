@@ -14,4 +14,13 @@ public class OrderToCommandTest {
 
         assertThat(command).isEqualTo("T::");
     }
+
+    @Test
+    public void should_crate_command_for_one_coffee_order() {
+        Order order = new Order(Drink.COFFEE, 0);
+
+        String command = order.toCommand();
+
+        assertThat(command).isEqualTo("C::");
+    }
 }
