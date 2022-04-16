@@ -11,11 +11,11 @@ public final class CoffeeMachine {
     }
 
     public void make(Order order) {
-        if (order.getMoney().compareTo(order.getDrink().getPrice()) != -1) {
+        if (order.getMoney().compareTo(order.getDrinkPrice()) != -1) {
             coffeeMaker.execute(toCommand(order));
         }
         else {
-            BigDecimal missingMoney = order.getDrink().getPrice().subtract(order.getMoney());
+            BigDecimal missingMoney = order.getDrinkPrice().subtract(order.getMoney());
             coffeeMaker.execute("M:Not enough money. Missing " + missingMoney + " euros");
         }
     }

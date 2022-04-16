@@ -14,8 +14,12 @@ public final class Order {
         this.money = money;
     }
 
-    public Drink getDrink() {
-        return drink;
+    public String getDrinkCode() {
+        return drink.getCode();
+    }
+
+    public BigDecimal getDrinkPrice() {
+        return drink.getPrice();
     }
 
     public int getSugar() {
@@ -24,9 +28,5 @@ public final class Order {
 
     public BigDecimal getMoney() {
         return money;
-    }
-
-    public String getDrinkCode() {
-        return drink.getCode();
     }
 }
