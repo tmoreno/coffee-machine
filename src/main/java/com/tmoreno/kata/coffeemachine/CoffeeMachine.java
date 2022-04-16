@@ -21,11 +21,17 @@ public final class CoffeeMachine {
     }
 
     private String toCommand(Order order) {
+        String drinkCode = order.getDrinkCode();
+
+        if (order.isExtraHot()) {
+            drinkCode += "h";
+        }
+
         if (order.getSugar() > 0) {
-            return order.getDrinkCode() + ":" + order.getSugar() + ":0";
+            return drinkCode + ":" + order.getSugar() + ":0";
         }
         else {
-            return order.getDrinkCode() + "::";
+            return drinkCode + "::";
         }
     }
 }
