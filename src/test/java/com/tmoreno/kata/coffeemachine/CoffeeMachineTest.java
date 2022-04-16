@@ -41,6 +41,13 @@ public class CoffeeMachineTest {
     }
 
     @Test
+    public void should_send_command_to_coffee_maker_for_an_orange_juice_order() {
+        coffeeMachine.make(new Order(Drink.ORANGE_JUICE, 0, Drink.ORANGE_JUICE.getPrice()));
+
+        verify(coffeeMaker).execute("O::");
+    }
+
+    @Test
     public void should_send_command_to_coffee_maker_for_order_with_one_sugar() {
         coffeeMachine.make(new Order(Drink.CHOCOLATE, 1, Drink.CHOCOLATE.getPrice()));
 
