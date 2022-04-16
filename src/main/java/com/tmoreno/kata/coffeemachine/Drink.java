@@ -2,7 +2,8 @@ package com.tmoreno.kata.coffeemachine;
 
 public enum Drink {
     COFFEE("C"),
-    TEA("T");
+    TEA("T"),
+    CHOCOLATE("H");
 
     private final String code;
 
