@@ -51,4 +51,13 @@ public class CoffeeMachineTest {
 
         verify(coffeeMaker).execute("T:2:0");
     }
+
+    @Test
+    public void should_send_not_enough_money_command() {
+        double money = Drink.TEA.getPrice() - 0.1;
+
+        coffeeMachine.make(new Order(Drink.TEA, 2, money));
+
+        verify(coffeeMaker).execute("M:Not enough money. Missing 0.1 euros");
+    }
 }
