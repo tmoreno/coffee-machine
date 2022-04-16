@@ -18,16 +18,15 @@ public final class Order {
         return drink;
     }
 
+    public int getSugar() {
+        return sugar;
+    }
+
     public BigDecimal getMoney() {
         return money;
     }
 
-    public String toCommand() {
-        if (sugar > 0) {
-            return drink.getCode() + ":" + sugar + ":0";
-        }
-        else {
-            return drink.getCode() + "::";
-        }
+    public String getDrinkCode() {
+        return drink.getCode();
     }
 }
