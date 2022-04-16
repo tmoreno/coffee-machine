@@ -6,12 +6,10 @@ public final class Order {
 
     private final Drink drink;
     private final int sugar;
-    private final BigDecimal money;
 
-    public Order(Drink drink, int sugar, BigDecimal money) {
+    public Order(Drink drink, int sugar) {
         this.drink = drink;
         this.sugar = sugar;
-        this.money = money;
     }
 
     public String getDrinkCode() {
@@ -24,9 +22,5 @@ public final class Order {
 
     public int getSugar() {
         return sugar;
-    }
-
-    public BigDecimal getMoney() {
-        return money;
     }
 }

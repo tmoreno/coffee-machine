@@ -10,13 +10,13 @@ public final class CoffeeMachine {
         this.coffeeMaker = coffeeMaker;
     }
 
-    public void make(Order order) {
-        if (order.getMoney().compareTo(order.getDrinkPrice()) != -1) {
+    public void make(Order order, BigDecimal payment) {
+        if (payment.compareTo(order.getDrinkPrice()) != -1) {
             coffeeMaker.execute(toCommand(order));
         }
         else {
-            BigDecimal missingMoney = order.getDrinkPrice().subtract(order.getMoney());
-            coffeeMaker.execute("M:Not enough money. Missing " + missingMoney + " euros");
+            BigDecimal missingPayment = order.getDrinkPrice().subtract(payment);
+            coffeeMaker.execute("M:Not enough money. Missing " + missingPayment + " euros");
         }
     }
 
