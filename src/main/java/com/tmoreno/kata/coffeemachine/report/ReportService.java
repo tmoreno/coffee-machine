@@ -1,13 +1,15 @@
 package com.tmoreno.kata.coffeemachine.report;
 
+import com.tmoreno.kata.coffeemachine.DrinkCode;
 import com.tmoreno.kata.coffeemachine.Order;
 import com.tmoreno.kata.coffeemachine.OrderRepository;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public final class ReportService {
 
@@ -20,23 +22,27 @@ public final class ReportService {
     }
 
     public void execute() {
-        List<Order> orders = orderRepository.get();
+        Map<DrinkCode, AtomicInteger> drinksServed = Arrays.stream(DrinkCode.values())
+            .collect(Collectors.toMap(
+                e -> e,
+                e -> new AtomicInteger()
+            ));
 
-        Map<String, AtomicInteger> drinkServed = new HashMap<>();
         BigDecimal totalAmountServed = BigDecimal.ZERO;
 
+        List<Order> orders = orderRepository.get();
+
         for (Order order : orders) {
-            drinkServed.computeIfAbsent(order.getDrinkCode(), k -> new AtomicInteger())
-                    .incrementAndGet();
+            drinksServed.get(order.getDrinkCode()).incrementAndGet();
 
             totalAmountServed = totalAmountServed.add(order.getDrinkPrice());
         }
 
         Report report = new Report(
-            drinkServed.getOrDefault("T", new AtomicInteger()).intValue(),
-            drinkServed.getOrDefault("C", new AtomicInteger()).intValue(),
-            drinkServed.getOrDefault("H", new AtomicInteger()).intValue(),
-            drinkServed.getOrDefault("O", new AtomicInteger()).intValue(),
+            drinksServed.get(DrinkCode.TEA).intValue(),
+            drinksServed.get(DrinkCode.COFFEE).intValue(),
+            drinksServed.get(DrinkCode.CHOCOLATE).intValue(),
+            drinksServed.get(DrinkCode.ORANGE_JUICE).intValue(),
             totalAmountServed
         );
 

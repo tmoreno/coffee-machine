@@ -25,7 +25,7 @@ public final class CoffeeMachine {
     }
 
     private String toCommand(Order order) {
-        String drinkCode = order.getDrinkCode();
+        String drinkCode = order.getDrinkCode().getCode();
 
         if (order.isExtraHot()) {
             drinkCode += "h";
