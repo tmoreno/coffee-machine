@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CoffeeMachineTest {
@@ -20,6 +21,12 @@ public class CoffeeMachineTest {
 
     @Mock
     private CoffeeMaker coffeeMaker;
+
+    @Mock
+    private BeverageQuantityChecker beverageQuantityChecker;
+
+    @Mock
+    private EmailNotifier emailNotifier;
 
     @Mock
     private OrderRepository orderRepository;
@@ -106,5 +113,17 @@ public class CoffeeMachineTest {
         coffeeMachine.make(order, TEA_PRICE);
 
         verify(orderRepository).save(order);
+    }
+
+    @Test
+    public void should_send_email_notification_and_show_message_when_there_are_not_enough_beverage_quantity() {
+        when(beverageQuantityChecker.isEmpty(DrinkCode.TEA.getCode())).thenReturn(true);
+
+        TeaOrder order = new TeaOrder(0, false);
+
+        coffeeMachine.make(order, TEA_PRICE);
+
+        verify(emailNotifier).notifyMissingDrink(DrinkCode.TEA.getCode());
+        verify(coffeeMaker).execute("M:Not enough tea.");
     }
 }

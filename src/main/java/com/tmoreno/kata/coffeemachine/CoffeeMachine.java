@@ -5,10 +5,19 @@ import java.math.BigDecimal;
 public final class CoffeeMachine {
 
     private final CoffeeMaker coffeeMaker;
+    private final BeverageQuantityChecker beverageQuantityChecker;
+    private final EmailNotifier emailNotifier;
     private final OrderRepository orderRepository;
 
-    public CoffeeMachine(CoffeeMaker coffeeMaker, OrderRepository orderRepository) {
+    public CoffeeMachine(
+        CoffeeMaker coffeeMaker,
+        BeverageQuantityChecker beverageQuantityChecker,
+        EmailNotifier emailNotifier,
+        OrderRepository orderRepository
+    ) {
         this.coffeeMaker = coffeeMaker;
+        this.beverageQuantityChecker = beverageQuantityChecker;
+        this.emailNotifier = emailNotifier;
         this.orderRepository = orderRepository;
     }
 
