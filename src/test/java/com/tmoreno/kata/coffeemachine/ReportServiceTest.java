@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,7 +27,7 @@ public class ReportServiceTest {
 
     @Test
     public void should_print_empty_when_there_are_not_saved_orders() {
-        Report emptyReport = new Report();
+        Report emptyReport = new Report(0, 0, 0, 0, BigDecimal.ZERO);
 
         reportService.execute();
 

@@ -5,18 +5,24 @@ import java.util.Objects;
 
 public final class Report {
 
-    private int teaSold;
-    private int coffeeSold;
-    private int chocolateSold;
-    private int orangeSold;
-    private BigDecimal totalEarned;
+    private final int teaSold;
+    private final int coffeeSold;
+    private final int chocolateSold;
+    private final int orangeSold;
+    private final BigDecimal totalEarned;
 
-    public Report() {
-        teaSold = 0;
-        coffeeSold = 0;
-        chocolateSold = 0;
-        orangeSold = 0;
-        totalEarned = BigDecimal.ZERO;
+    public Report(
+        int teaSold,
+        int coffeeSold,
+        int chocolateSold,
+        int orangeSold,
+        BigDecimal totalEarned
+    ) {
+        this.teaSold = teaSold;
+        this.coffeeSold = coffeeSold;
+        this.chocolateSold = chocolateSold;
+        this.orangeSold = orangeSold;
+        this.totalEarned = totalEarned;
     }
 
     @Override
