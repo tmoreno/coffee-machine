@@ -37,16 +37,22 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void given_one_order_of_each_drink_then_report_has_one_item_sold_of_each_drink_and_total_amount() {
+    public void should_write_report_for_different_orders_for_each_drink() {
         when(orderRepository.get())
             .thenReturn(List.of(
                 new ChocolateOrder(0, false),
+                new ChocolateOrder(0, false),
+                new ChocolateOrder(0, false),
+                new ChocolateOrder(0, false),
+                new CoffeeOrder(0, false),
+                new CoffeeOrder(0, false),
                 new CoffeeOrder(0, false),
                 new OrangeJuiceOrder(),
+                new OrangeJuiceOrder(),
                 new TeaOrder(0, false)
-        ));
+            ));
 
-        Report report = new Report(1, 1, 1, 1, new BigDecimal("2.1"));
+        Report report = new Report(1, 3, 4, 2, new BigDecimal("5.4"));
 
         reportService.execute();
 
