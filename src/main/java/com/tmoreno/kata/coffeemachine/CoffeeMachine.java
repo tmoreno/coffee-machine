@@ -22,6 +22,12 @@ public final class CoffeeMachine {
     }
 
     public void make(Order order, BigDecimal payment) {
+        if (beverageQuantityChecker.isEmpty(order.getDrinkCode().getCode())) {
+            emailNotifier.notifyMissingDrink(order.getDrinkCode().getCode());
+            coffeeMaker.execute("M:Not enough " + order.getDrinkCode().getHumanReadable() + ".");
+            return;
+        }
+
         if (payment.compareTo(order.getDrinkPrice()) != -1) {
             coffeeMaker.execute(toCommand(order));
 
