@@ -5,14 +5,18 @@ import java.math.BigDecimal;
 public final class CoffeeMachine {
 
     private final CoffeeMaker coffeeMaker;
+    private final OrderRepository orderRepository;
 
-    public CoffeeMachine(CoffeeMaker coffeeMaker) {
+    public CoffeeMachine(CoffeeMaker coffeeMaker, OrderRepository orderRepository) {
         this.coffeeMaker = coffeeMaker;
+        this.orderRepository = orderRepository;
     }
 
     public void make(Order order, BigDecimal payment) {
         if (payment.compareTo(order.getDrinkPrice()) != -1) {
             coffeeMaker.execute(toCommand(order));
+
+            orderRepository.save(order);
         }
         else {
             BigDecimal missingPayment = order.getDrinkPrice().subtract(payment);

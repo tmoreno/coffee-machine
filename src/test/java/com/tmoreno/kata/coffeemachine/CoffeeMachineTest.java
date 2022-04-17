@@ -21,6 +21,9 @@ public class CoffeeMachineTest {
     @Mock
     private CoffeeMaker coffeeMaker;
 
+    @Mock
+    private OrderRepository orderRepository;
+
     @InjectMocks
     private CoffeeMachine coffeeMachine;
 
@@ -94,5 +97,14 @@ public class CoffeeMachineTest {
         coffeeMachine.make(new TeaOrder(0, false), payment);
 
         verify(coffeeMaker).execute("M:Not enough money. Missing 0.1 euros");
+    }
+
+    @Test
+    public void should_save_order_when_is_served() {
+        TeaOrder order = new TeaOrder(0, false);
+
+        coffeeMachine.make(order, TEA_PRICE);
+
+        verify(orderRepository).save(order);
     }
 }
