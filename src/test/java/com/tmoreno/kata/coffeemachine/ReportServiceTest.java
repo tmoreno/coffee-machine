@@ -1,11 +1,17 @@
 package com.tmoreno.kata.coffeemachine;
 
+import com.tmoreno.kata.coffeemachine.report.Report;
+import com.tmoreno.kata.coffeemachine.report.ReportService;
+import com.tmoreno.kata.coffeemachine.report.ReportWriter;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 public class ReportServiceTest {
 
     @Mock
