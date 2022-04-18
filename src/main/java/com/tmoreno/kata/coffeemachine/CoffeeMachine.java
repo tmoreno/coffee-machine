@@ -26,9 +26,7 @@ public final class CoffeeMachine {
             return;
         }
 
-        if (payment.compareTo(order.getDrinkPrice()) == -1) {
-            BigDecimal missingPayment = order.getDrinkPrice().subtract(payment);
-            coffeeMaker.execute("M:Not enough money. Missing " + missingPayment + " euros");
+        if (!enoughPayment(order, payment)) {
             return;
         }
 
@@ -44,7 +42,20 @@ public final class CoffeeMachine {
             coffeeMaker.execute("M:Not enough " + order.getDrinkCode().getHumanReadable() + ".");
 
             return false;
-        } else {
+        }
+        else {
+            return true;
+        }
+    }
+
+    private boolean enoughPayment(Order order, BigDecimal payment) {
+        if (payment.compareTo(order.getDrinkPrice()) == -1) {
+            BigDecimal missingPayment = order.getDrinkPrice().subtract(payment);
+            coffeeMaker.execute("M:Not enough money. Missing " + missingPayment + " euros");
+
+            return false;
+        }
+        else {
             return true;
         }
     }
