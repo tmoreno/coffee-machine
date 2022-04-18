@@ -22,9 +22,7 @@ public final class CoffeeMachine {
     }
 
     public void make(Order order, BigDecimal payment) {
-        if (beverageQuantityChecker.isEmpty(order.getDrinkCode().getCode())) {
-            emailNotifier.notifyMissingDrink(order.getDrinkCode().getCode());
-            coffeeMaker.execute("M:Not enough " + order.getDrinkCode().getHumanReadable() + ".");
+        if (!enoughBeverageQuantity(order)) {
             return;
         }
 
@@ -33,10 +31,22 @@ public final class CoffeeMachine {
             coffeeMaker.execute("M:Not enough money. Missing " + missingPayment + " euros");
             return;
         }
-        
+
         coffeeMaker.execute(toCommand(order));
 
         orderRepository.save(order);
+    }
+
+    private boolean enoughBeverageQuantity(Order order) {
+        if (beverageQuantityChecker.isEmpty(order.getDrinkCode().getCode())) {
+            emailNotifier.notifyMissingDrink(order.getDrinkCode().getCode());
+
+            coffeeMaker.execute("M:Not enough " + order.getDrinkCode().getHumanReadable() + ".");
+
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private String toCommand(Order order) {
