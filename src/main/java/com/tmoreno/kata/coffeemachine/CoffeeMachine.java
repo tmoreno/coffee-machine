@@ -28,15 +28,15 @@ public final class CoffeeMachine {
             return;
         }
 
-        if (payment.compareTo(order.getDrinkPrice()) != -1) {
-            coffeeMaker.execute(toCommand(order));
-
-            orderRepository.save(order);
-        }
-        else {
+        if (payment.compareTo(order.getDrinkPrice()) == -1) {
             BigDecimal missingPayment = order.getDrinkPrice().subtract(payment);
             coffeeMaker.execute("M:Not enough money. Missing " + missingPayment + " euros");
+            return;
         }
+        
+        coffeeMaker.execute(toCommand(order));
+
+        orderRepository.save(order);
     }
 
     private String toCommand(Order order) {
